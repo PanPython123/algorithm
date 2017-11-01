@@ -1,5 +1,8 @@
 class Heap
-    constructor: (array) -> @array = array
+    constructor: (array) ->
+        @array = []
+        for i in array
+            @add i
 
     # constructor: () ->
 
@@ -21,6 +24,7 @@ class Heap
 
     remove: () ->
         lastindex = @array.length - 1
+        removable = @array[0]
         @array[0] = @array[lastindex]
         @array.pop()
 
@@ -41,9 +45,16 @@ class Heap
                 @array[bigger] = @array[currentIndex]
                 @array[currentIndex] = temp
                 currentIndex = bigger
-                console.log bigger
             else
                 break
+        result = removable
+
+    heap_sort: ->
+        sorted_array = []
+        for i in @array
+
+            sorted_array.push(@remove i)
+        console.log sorted_array
 
     printout: ->
         console.log @array
@@ -51,12 +62,5 @@ class Heap
 
 
 # random_list = [234, 12, 456, 212, 2, -123]
-test = new Heap []
-test.add(-342)
-test.add(234)
-test.add(12)
-test.add(456)
-test.add(234)
-test.printout()
-test.remove()
-test.printout()
+test = new Heap [1, 234, 345, 456, -123, -12, -1]
+test.heap_sort()
